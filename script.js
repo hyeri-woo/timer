@@ -1,81 +1,97 @@
 const timer = document.querySelector(".timer-wrapper");
-const hours = timer.querySelector(".input-hours");
-const min = timer.querySelector(".input-min");
-const sec = timer.querySelector(".input-sec");
+const inputList = timer.querySelectorAll("input");
+const inputHours = timer.querySelector(".input-hours");
+const inputMin = timer.querySelector(".input-min");
+const inputSec = timer.querySelector(".input-sec");
 const btnStart = document.querySelector(".btn-start");
 const btnReset = document.querySelector(".btn-reset");
 
 window.addEventListener("load", () => {
-    hours.value = "00";
-    min.value = "00";
-    sec.value = "00";
+    inputHours.value = "00";
+    inputMin.value = "00";
+    inputSec.value = "00";
     btnStart.disabled = true;
     btnReset.disabled = true;
 });
 
-hours.addEventListener("change", () => {
-    btnStart.disabled = false;
-    btnReset.disabled = false;
-})
-
-min.addEventListener("change", () => {
-    btnStart.disabled = false;
-    btnReset.disabled = false;
-})
-
-sec.addEventListener("change", () => {
-    btnStart.disabled = false;
-    btnReset.disabled = false;
-    console.log("change");
-    if(hours.value === "00" && min.value === "00" && sec.value === "00") {
-        alert("Finish");
-        hours.value = "00";
-        min.value = "00";
-        sec.value = "00";
-        btnStart.disabled = true;
-        btnReset.disabled = true;
-    }
+inputList.forEach((item, index) => {
+    item.addEventListener("change", () => {
+        if(item.value.length > 2) {
+            alert("Invalid Number");
+            item.value = "00";
+        }
+        if(index === 1) {
+            if(parseInt(item.value) > 60) {
+                alert("Invalid Number: Maximum minute = 60");
+                item.value = "60";
+            }
+        }
+        if(index === 2) {
+            if(parseInt(item.value) > 60) {
+                alert("Invalid Number: Maximum second = 60");
+                item.value = "60";
+            }
+        }
+        btnStart.disabled = false;
+        btnReset.disabled = false;
+        item.value = item.value.toString().padStart(2, "0");
+    })
 })
 
 const timeReset = () => {
-    hours.value = "00";
-    min.value = "00";
-    sec.value = "00";
+    btnStart.classList.remove("pause");
+    inputHours.value = "00";
+    inputMin.value = "00";
+    inputSec.value = "00";
     btnStart.disabled = true;
     btnReset.disabled = true;
 }
 
-const timeConverter = (hours, min, sec) => {
-    console.log(parseInt(hours) * 3600 + parseInt(min) * 60 + parseInt(sec));
-    return parseInt(hours) * 3600 + parseInt(min) * 60 + parseInt(sec);
+const timeConverter = (time) => {
+    const hour = Math.floor(time/3600);
+    const min = Math.floor((time - hour*3600)/60);
+    const sec = time - hour*3600 - min*60;
+    return [hour, min, sec];
 }
 
-const timerEvent = (hours, min, sec, isPause) => {
-    let hourChange = hours;
-    let minChange = min;
-    let secChange = sec;
-    let timerId = setInterval(() => {
-        console.log(hourChange, minChange, secChange);
-        secChange--;
-    }, 1000);
-    const time = parseInt(hours) * 3600 + parseInt(min) * 60 + parseInt(sec);
-    setTimeout(() => {clearInterval(timerId);}, time*1000);
+let timerId;
+function startTimer() {
+    let time = parseInt(inputHours.value) * 3600 + parseInt(inputMin.value) * 60 + parseInt(inputSec.value);
+    time--;
+    function timerEvent () {
+        let [hourChange, minChange, secChange] = timeConverter(time);
+        time--;
+        inputHours.value = hourChange.toString().padStart(2, "0");
+        inputMin.value = minChange.toString().padStart(2, "0");
+        inputSec.value = secChange.toString().padStart(2, "0");
+    }
+    timerId = setInterval(timerEvent, 1000);
+    setTimeout(() => {
+        clearInterval(timerId);
+        timeReset();
+        alert("Finish");
+    }, (time+1)*1000+500);
 }
+
+function stopTimer() {
+    clearInterval(timerId);
+}
+
 
 btnStart.addEventListener("click", () => {
     if(btnStart.classList.contains("pause")) {
         btnStart.classList.remove("pause");
-        timerEvent(hours.value, min.value, sec.value, true);
+        btnStart.textContent = "START";
+        stopTimer();
     } else {
         btnStart.classList.add("pause");
-        timerEvent(hours.value, min.value, sec.value, false);
+        btnStart.textContent = "PAUSE";
+        startTimer();
     }
-    sec.value = "00";
-    // if(sec.value === "00") {
-    //     btnStart.classList.remove("pause");
-    //     timeReset();
-    // }
 })
 
-btnReset.addEventListener("click", () => timeReset())
+btnReset.addEventListener("click", () => {
+    stopTimer();
+    timeReset();
+})
 

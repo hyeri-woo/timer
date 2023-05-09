@@ -56,7 +56,8 @@ main {
     .timer-wrapper {
         display: flex;
         padding: 33px 15px 40px;
-        gap: 22px;
+        gap: 8px;
+        align-items: center;
         label {
             font-size: 12px;
             color: #A5B6EE;
@@ -72,17 +73,40 @@ main {
             color: white;
             font-weight: 700;
             font-size: 40px;
-            position: relative;
         }
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
+            -webkit-appearance: none;
+            margin: 0;
         }
-        input:before {
+        & > span {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        & > div {
+            position: relative;
+        }
+        & div:before {
             content: "";
             display: inline-block;
             position: absolute;
+            width: 19px;
+            top: 58px;
+            z-index: 10;
+            left: 0;
+            height: 1px;
+            background: #354971;
+        }
+        & div:after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            width: 19px;
+            top: 58px;
+            z-index: 10;
+            right: 0;
+            height: 1px;
+            background: #354971;
         }
     }
 

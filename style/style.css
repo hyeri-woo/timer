@@ -58,7 +58,8 @@ main h2 {
 main .timer-wrapper {
   display: flex;
   padding: 33px 15px 40px;
-  gap: 22px;
+  gap: 8px;
+  align-items: center;
 }
 main .timer-wrapper label {
   font-size: 12px;
@@ -75,17 +76,40 @@ main .timer-wrapper input {
   color: white;
   font-weight: 700;
   font-size: 40px;
-  position: relative;
 }
 main .timer-wrapper input::-webkit-outer-spin-button,
 main .timer-wrapper input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-main .timer-wrapper input:before {
+main .timer-wrapper > span {
+  display: inline-block;
+  margin-top: 20px;
+}
+main .timer-wrapper > div {
+  position: relative;
+}
+main .timer-wrapper div:before {
   content: "";
   display: inline-block;
   position: absolute;
+  width: 19px;
+  top: 58px;
+  z-index: 10;
+  left: 0;
+  height: 1px;
+  background: #354971;
+}
+main .timer-wrapper div:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 19px;
+  top: 58px;
+  z-index: 10;
+  right: 0;
+  height: 1px;
+  background: #354971;
 }
 main .button-wrapper button {
   padding: 16px 23px 16px 44px;
