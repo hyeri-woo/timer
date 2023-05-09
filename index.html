@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+    <header>
+        <h1><img src="./img/logo.svg"/><span class="a11y-hidden">WENIV TIMER</span></h1>
+    </header>
+    <main>
+        <h2>TIMER</h2>
+        <div class="timer-wrapper">
+            <div class="hours-wrapper">
+                <label for="hours">HRS</label>
+                <input id="hours" class="input-hours" type="number" min="0" max="99">
+            </div>
+            <div class="min-wrapper">
+                <label for="min">MIN</label>
+                <input id="min" class="input-min" type="number" min="0" max="60">
+            </div>
+            <div class="sec-wrapper">
+                <label for="sec">SEC</label>
+                <input id="sec" class="input-sec" type="number" min="0" max="60">
+            </div>
+        </div>
+        <div class="button-wrapper">
+            <button class="btn-start" type="button">START</button>
+            <button class="btn-reset" type="button">RESET</button>
+        </div>
+    </main>
+    <footer>
+        <h2>ⓒ WENIV Corp.</h2>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

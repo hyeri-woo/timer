@@ -1,0 +1,150 @@
+.a11y-hidden {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+button, input {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+
+body {
+    background: radial-gradient(96.74% 276.79% at 3.59% 5.28%, #F0F4FF 0%, #A5B6EE 100%) no-repeat;
+    background-attachment: fixed;
+}
+
+/* ------------------------------------ header */
+header {
+    padding: 72px 0 60px;
+    h1 {
+        text-align: center;
+        img {
+            width: 244px;
+        }
+    }
+}
+
+/* ------------------------------------ main */
+main {
+    margin: auto;
+    width: 400px;
+    background: linear-gradient(144.07deg, #5572BB 2.13%, #374B7C 102.97%);
+    border-radius: 16px;
+    padding: 48px 44px 40px;
+    text-align: center;
+    box-shadow: 20px 20px 60px 10px rgba(55, 75, 124, 0.4);
+    h2 {
+        color: white;
+        padding-bottom: 23px;
+        border-bottom: 1px solid #3D538A;
+        box-shadow: 0 1px 0 #5B75B4;
+    }
+    .timer-wrapper {
+        display: flex;
+        padding: 33px 15px 40px;
+        gap: 22px;
+        label {
+            font-size: 12px;
+            color: #A5B6EE;
+            font-weight: 700;
+        }
+        input {
+            background: linear-gradient(314.28deg, #304577 0%, #4C65A0 83%) no-repeat;
+            border: 1px solid #354971;
+            border-radius: 4px;
+            width: 80px;
+            height: 80px;
+            text-align: center;
+            color: white;
+            font-weight: 700;
+            font-size: 40px;
+            position: relative;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        input:before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+        }
+    }
+
+    /* button */
+    .button-wrapper {
+        button {
+            padding: 16px 23px 16px 44px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            position: relative;
+            color: white;
+        }
+        .btn-start:before {
+            content: "";
+            position: absolute;
+            display: inline-block;
+            width: 11px;
+            height: 17px;
+            background: url("../img/start.svg") no-repeat center / cover;
+            left: 27px;
+            top: 15px;
+        }
+        .btn-reset:before {
+            content: "";
+            position: absolute;
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url("../img/reset.svg") no-repeat center / cover;
+            left: 23px;
+            top: 15px;
+        }
+        .btn-start {
+            margin-right: 12px;
+            background: #5180FF;
+        }
+        .btn-start.pause {
+            background: #15C2B8;
+            &:before {
+                background: url("../img/stop.svg") no-repeat center / cover;
+            }
+        }
+        .btn-reset {
+            background: #FB7099;
+        }
+        button[disabled=disabled], button:disabled {
+            color: #617199;
+            background: #324577;
+            cursor: initial;
+            &:before {
+                opacity: 0.25;
+            }
+        }
+    }
+}
+
+
+/* ------------------------------------ footer */
+footer {
+    padding: 60px 0;
+    color: #8596BF;
+    font-size: 14px;
+    text-align: center;
+}
